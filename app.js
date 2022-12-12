@@ -8,7 +8,7 @@ require('./models/connection');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var settingsRouter = require('./routes/settings');
+var settingsRouter = require('./routes/settings.js');
 
 var app = express();
 
