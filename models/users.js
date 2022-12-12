@@ -8,8 +8,15 @@ const adresseSchema = mongoose.Schema({
 })
 
 const userActionsSchema = mongoose.Schema({
+    transport: Boolean,
     deplacement: Boolean,
     hebergement: Boolean,
+})
+
+const settingsSchema = mongoose.Schema({
+    language: [String],
+    accueillir: Boolean,
+    seDeplacer: Boolean,
 })
 
 const userSchema = mongoose.Schema({
@@ -29,7 +36,7 @@ const userSchema = mongoose.Schema({
    userActions: userActionsSchema,
    isAvaible: Boolean,
    nombreAide: Number,
-//    setting??
+   settings: settingsSchema, 
    favouritesHelpers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'users'}]
 });
    
