@@ -55,4 +55,19 @@ router.post('/signup', (req, res) => {
   });
 })
 
+/* POST user/signin. */
+router.post('/signin', (req, res) => {
+  // if (!checkBody(req.body, ['email', 'password'])) {
+  //   res.json({ result: false, error: 'Missing or empty fields' });
+  //   return;
+  // }
+
+  User.findOne({ email: req.body.email }).then(user => {
+    if (user && bcrypt.compareSync(req.body.password, user.password)) {
+      res.json({ result: true, userInfos: {email : user.email, prenom: user.prenom, nom : user.nom, token : user.token} });
+    } else {
+      res.json({ result: false, error: 'User not found or wrong password' });
+    }
+  });
+});
 module.exports = router;
