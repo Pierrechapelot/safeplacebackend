@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt');
 
 /* POST user/signUp. */
 router.post('/signup', (req, res) => {
-  console.log(req)
+  console.log(req.body)
 
   // Check if fields are empty :
   // if (!checkBody(req.body, ['username', 'password'])) {
@@ -25,7 +25,6 @@ router.post('/signup', (req, res) => {
         email: req.body.email,
         nom: req.body.nom,
         prenom: req.body.prenom,
-        username: req.body.username,
         password: hash,
         token: uid2(32),
         adresse: req.body.adresse,
@@ -47,7 +46,7 @@ router.post('/signup', (req, res) => {
       });
 
       newUser.save().then(newDoc => {
-        res.json({ result: true, user: { name: newDoc.name, username: newDoc.username, token: newDoc.token } });
+        res.json({ result: true, user: newDoc });
       });
     } else {
       // User already exists in database
