@@ -1,3 +1,9 @@
+# Images in tmp folder
+tmp/*.jpg
+tmp/*.jpeg
+tmp/*.png
+tmp/*.heic
+
 # Logs
 logs
 *.log
