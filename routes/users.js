@@ -70,4 +70,16 @@ router.post('/signin', (req, res) => {
     }
   });
 });
+
+/* update user/isconnected. */
+router.post('/isconnected', (req, res) => {
+
+  User.updateOne(
+    {email: req.body.email},
+    {isConnected: req.body.isConnected}
+  ).then(userStatus =>{
+    res.json({ result: true, updatedUser: userStatus})
+  })
+})
+
 module.exports = router;
