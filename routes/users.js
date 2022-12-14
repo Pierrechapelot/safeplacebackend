@@ -27,21 +27,34 @@ router.post('/signup', (req, res) => {
         prenom: req.body.prenom,
         password: hash,
         token: uid2(32),
-        adresse: req.body.adresse,
+        adresse: {
+          numeroRue: req.body.numeroRue,
+          rue: req.body.rue,
+          codePostal: req.body.codePostal,
+          ville: req.body.ville
+        },
         telephone: req.body.telephone,
         naissance: req.body.naissance,
         isConnected: false,
         idVerified: false,
         telVerified: false,
-        avatarUri: req.body.avatarUri,
+        avatarUri: '',
         lastPosition: {
-          latitude: req.body.latitude,
-          longitude: req.body.longitude
+          latitude: null,
+          longitude: null,
         },
-        userActions: req.body.userActions,
+        userActions: {
+          transport: false,
+          deplacement: false,
+          hebergement: false,
+        },
         isAvaible: false,
         nombreAide: null,
-        settings: req.body.settings,
+        settings: {
+          language: ['français'],
+          accueillir: false,
+          seDeplacer: false
+        },
         favouritesHelpers: [null]
       });
 
@@ -64,7 +77,7 @@ router.post('/signin', (req, res) => {
 
   User.findOne({ email: req.body.email }).then(user => {
     if (user && bcrypt.compareSync(req.body.password, user.password)) {
-      res.json({ result: true, userInfos: {email : user.email, prenom: user.prenom, nom : user.nom, token : user.token} });
+      res.json({ result: true, userInfos: { email: user.email, prenom: user.prenom, nom: user.nom, token: user.token } });
     } else {
       res.json({ result: false, error: 'User not found or wrong password' });
     }
@@ -75,10 +88,10 @@ router.post('/signin', (req, res) => {
 router.post('/isconnected', (req, res) => {
 
   User.updateOne(
-    {email: req.body.email},
-    {isConnected: req.body.isConnected}
-  ).then(userStatus =>{
-    res.json({ result: true, updatedUser: userStatus})
+    { email: req.body.email },
+    { isConnected: req.body.isConnected }
+  ).then(userStatus => {
+    res.json({ result: true, updatedUser: userStatus })
   })
 })
 
