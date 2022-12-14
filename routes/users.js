@@ -71,7 +71,7 @@ router.post('/signin', (req, res) => {
   });
 });
 
-/* update user/isconnected. */
+/* update user/isconnected.*/
 router.post('/isconnected', (req, res) => {
 
   User.updateOne(
