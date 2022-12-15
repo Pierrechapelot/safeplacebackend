@@ -106,4 +106,15 @@ router.post('/isconnected', (req, res) => {
   })
 })
 
+/* update user/isAvaible.*/
+router.post('/isavaible', (req, res) => {
+
+  User.updateOne(
+    { email: req.body.email },
+    { isAvaible: req.body.isAvaible }
+  ).then(userStatus => {
+    res.json({ result: true, updatedUser: userStatus })
+  })
+})
+
 module.exports = router;
