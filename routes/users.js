@@ -7,6 +7,17 @@ const uid2 = require('uid2');
 const bcrypt = require('bcrypt');
 
 /* POST user/signUp. */
+router.post('/checkemail', (req, res) => {
+  User.findOne({ email: req.body.email }).then (data => {
+    if(data){
+      res.json({ result: true, user: data });
+    }else{
+      res.json({ result: false });
+    }
+  })
+})
+
+/* POST user/signUp. */
 router.post('/signup', (req, res) => {
   console.log(req.body)
 
