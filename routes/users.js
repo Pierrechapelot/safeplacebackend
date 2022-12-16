@@ -5,6 +5,14 @@ const { checkBody } = require('../modules/checkBody');
 const User = require('../models/users');
 const uid2 = require('uid2');
 const bcrypt = require('bcrypt');
+const Pusher = require('pusher');
+const pusher = new Pusher({
+  appId: process.env.PUSHER_APPID,
+  key: process.env.PUSHER_KEY,
+  secret: process.env.PUSHER_SECRET,
+  cluster: process.env.PUSHER_CLUSTER,
+  useTLS: true,
+});
 
 /* POST user/signUp. */
 router.post('/checkemail', (req, res) => {
@@ -171,4 +179,33 @@ router.post('/deplacement', async (req, res) => {
   res.json({ result: true, user })
 })
 
+
+// Routes for chat
+
+// Join chat
+// router.put('/:username', (req, res) => {
+//   pusher.trigger('chat', 'join', {
+//     username: req.params.username,
+//   });
+
+//   res.json({ result: true });
+// });
+
+// // Leave chat
+// router.delete("/users/:username", (req, res) => {
+//   pusher.trigger('chat', 'leave', {
+//     username: req.params.username,
+//   });
+
+//   res.json({ result: true });
+// });
+
+// Send message
+router.post('/message', (req, res) => {
+  const message = req.body;
+
+  pusher.trigger('chat', 'message', message);
+
+  res.json({ result: true });
+});
 module.exports = router;
