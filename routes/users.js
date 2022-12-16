@@ -106,4 +106,18 @@ router.post('/isconnected', (req, res) => {
   })
 })
 
+router.post('/lastposition', (req, res) => {
+  User.findOne({ email: req.body.email }).then(user => {
+    console.log(req.body.email)
+    if (user) {
+      User.updateOne(
+        { email: req.body.email},
+        { lastPosition: req.body.lastPosition})
+        .then((userPosition) => {
+          res.json({ result: true, updatedUser: userPosition })
+      })
+    }
+  })
+});
+
 module.exports = router;

@@ -20,26 +20,25 @@ const settingsSchema = mongoose.Schema({
 })
 
 const userSchema = mongoose.Schema({
-   email : String, 
-   nom : String, 
-   prenom : String, 
-   password : String,
-   token: String,
-   adresse: adresseSchema,
-   telephone: String,
-   naissance: Date,
-   isConnected: Boolean,
-   idVerified: Boolean,
-   telVerified: Boolean,
-   avatarUri: String,
-   lastPosition: {latitude: Number, longitude: Number},
-   userActions: userActionsSchema,
-   isAvaible: Boolean,
-   nombreAide: Number,
-   settings: settingsSchema, 
-   favouritesHelpers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'users'}]
+    email : String, 
+    nom : String, 
+    prenom : String, 
+    password : String,
+    token: String,
+    adresse: adresseSchema,
+    telephone: String,
+    naissance: Date,
+    isConnected: Boolean,
+    idVerified: Boolean,
+    telVerified: Boolean,
+    avatarUri: String,
+    lastPosition: {latitude: Number, longitude: Number},
+    userActions: userActionsSchema,
+    isAvaible: Boolean,
+    nombreAide: Number,
+    settings: settingsSchema, 
+    favouritesHelpers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'users'}]
 });
-   
 
 const User = mongoose.model('users', userSchema);
 module.exports = User;
