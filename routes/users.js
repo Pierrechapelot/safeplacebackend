@@ -16,6 +16,13 @@ router.post('/checkemail', (req, res) => {
     }
   })
 })
+//  route GET to get users
+router.get("/", (req, res) => {
+  User.find().then(data =>{
+    res.json({users: data})
+  })
+
+});
 
 /* POST user/signUp. */
 router.post('/signup', (req, res) => {
