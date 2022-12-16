@@ -18,8 +18,8 @@ router.post('/checkemail', (req, res) => {
 })
 //  route GET to get users
 router.get("/", (req, res) => {
-  User.find().then(data =>{
-    res.json({users: data})
+  User.find().then(data => {
+    res.json({ users: data })
   })
 
 });
@@ -86,6 +86,16 @@ router.post('/signup', (req, res) => {
   });
 })
 
+/* Update profile picture's URI*/
+router.post('/uri', (req, res) => {
+User.updateOne(
+  {email: req.body.email},
+  {avatarUri: req.body.avatarUri}
+).then(updatedUri => {
+  res.json({result: true, updatedUri})
+})
+})
+
 /* POST user/signin. */
 router.post('/signin', (req, res) => {
   // if (!checkBody(req.body, ['email', 'password'])) {
@@ -129,11 +139,11 @@ router.post('/lastposition', (req, res) => {
     console.log(req.body.email)
     if (user) {
       User.updateOne(
-        { email: req.body.email},
-        { lastPosition: req.body.lastPosition})
+        { email: req.body.email },
+        { lastPosition: req.body.lastPosition })
         .then((userPosition) => {
           res.json({ result: true, updatedUser: userPosition })
-      })
+        })
     }
   })
 });
