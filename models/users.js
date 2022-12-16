@@ -9,7 +9,7 @@ const adresseSchema = mongoose.Schema({
 
 const userActionsSchema = mongoose.Schema({
     transport: Boolean,
-    deplacement: Boolean,
+    accompagnementDistance: Boolean,
     hebergement: Boolean,
 })
 
@@ -34,7 +34,7 @@ const userSchema = mongoose.Schema({
     avatarUri: String,
     lastPosition: {latitude: Number, longitude: Number},
     userActions: userActionsSchema,
-    isAvaible: Boolean,
+    isAvailable: Boolean,
     nombreAide: Number,
     settings: settingsSchema, 
     favouritesHelpers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'users'}]

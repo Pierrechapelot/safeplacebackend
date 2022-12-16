@@ -63,10 +63,10 @@ router.post('/signup', (req, res) => {
         },
         userActions: {
           transport: false,
-          deplacement: false,
+          accompagnementDistance: false,
           hebergement: false,
         },
-        isAvaible: false,
+        isAvailable: false,
         nombreAide: null,
         settings: {
           language: ['français'],
@@ -114,11 +114,11 @@ router.post('/isconnected', (req, res) => {
 })
 
 /* update user/isAvaible.*/
-router.post('/isavaible', (req, res) => {
+router.post('/isavailable', (req, res) => {
 
   User.updateOne(
     { email: req.body.email },
-    { isAvaible: req.body.isAvaible }
+    { isAvailable: req.body.isAvailable }
   ).then(userStatus => {
     res.json({ result: true, updatedUser: userStatus })
   })
@@ -160,13 +160,13 @@ router.post('/transport', async (req, res) => {
   res.json({ result: true, user })
 })
 
-/* update deplacementStatus.*/
-router.post('/deplacement', async (req, res) => {
+/* update accompagnementStatus.*/
+router.post('/accompagnementdistance', async (req, res) => {
 
   let user = await User.findOne(
     { email: req.body.email }
   )
-  user.userActions.deplacement = req.body.deplacement
+  user.userActions.accompagnementDistance = req.body.accompagnementDistance
   user = await user.save()
   res.json({ result: true, user })
 })
