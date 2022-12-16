@@ -149,4 +149,26 @@ router.post('/hebergement', async (req, res) => {
   res.json({ result: true, user })
 })
 
+/* update transportStatus.*/
+router.post('/transport', async (req, res) => {
+
+  let user = await User.findOne(
+    { email: req.body.email }
+  )
+  user.userActions.transport = req.body.transport
+  user = await user.save()
+  res.json({ result: true, user })
+})
+
+/* update deplacementStatus.*/
+router.post('/deplacement', async (req, res) => {
+
+  let user = await User.findOne(
+    { email: req.body.email }
+  )
+  user.userActions.deplacement = req.body.deplacement
+  user = await user.save()
+  res.json({ result: true, user })
+})
+
 module.exports = router;
