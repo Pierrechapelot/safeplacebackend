@@ -8,10 +8,10 @@ const bcrypt = require('bcrypt');
 
 /* POST user/signUp. */
 router.post('/checkemail', (req, res) => {
-  User.findOne({ email: req.body.email }).then (data => {
-    if(data){
+  User.findOne({ email: req.body.email }).then(data => {
+    if (data) {
       res.json({ result: true, user: data });
-    }else{
+    } else {
       res.json({ result: false });
     }
   })
@@ -115,6 +115,17 @@ router.post('/isavaible', (req, res) => {
   ).then(userStatus => {
     res.json({ result: true, updatedUser: userStatus })
   })
+})
+
+/* update hebergementStatus.*/
+router.post('/hebergement', async (req, res) => {
+
+  let user = await User.findOne(
+    { email: req.body.email }
+  )
+  user.userActions.hebergement = req.body.hebergement
+  user = await user.save()
+  res.json({ result: true, user })
 })
 
 module.exports = router;
