@@ -71,18 +71,15 @@ router.post("/signup", (req, res) => {
           longitude: null,
         },
         userActions: {
+          hebergement: false,
           transport: false,
           accompagnementDistance: false,
-          hebergement: false,
+          aller: false,
+          venir: false,
         },
         isAvailable: false,
         nombreAide: null,
-        settings: {
-          language: ["français"],
-          accueillir: false,
-          seDeplacer: false,
-        },
-        favouritesHelpers: [null],
+        favouritesHelpers: [null]
       });
 
       newUser.save().then((newDoc) => {
@@ -96,14 +93,14 @@ router.post("/signup", (req, res) => {
 });
 
 /* Update profile picture's URI*/
-router.post("/uri", (req, res) => {
+router.post('/uri', (req, res) => {
   User.updateOne(
     { email: req.body.email },
     { avatarUri: req.body.avatarUri }
-  ).then((updatedUri) => {
-    res.json({ result: true, updatedUri });
-  });
-});
+  ).then(updatedUri => {
+    res.json({ result: true, updatedUri })
+  })
+})
 
 /* POST user/signin. */
 router.post("/signin", (req, res) => {
@@ -181,12 +178,37 @@ router.post("/transport", async (req, res) => {
 });
 
 /* update accompagnementStatus.*/
-router.post("/accompagnementdistance", async (req, res) => {
-  let user = await User.findOne({ email: req.body.email });
-  user.userActions.accompagnementDistance = req.body.accompagnementDistance;
-  user = await user.save();
-  res.json({ result: true, user });
-});
+router.post('/accompagnementdistance', async (req, res) => {
+
+  let user = await User.findOne(
+    { email: req.body.email }
+  )
+  user.userActions.accompagnementDistance = req.body.accompagnementDistance
+  user = await user.save()
+  res.json({ result: true, user })
+})
+
+/* update allerStatus.*/
+router.post('/aller', async (req, res) => {
+
+  let user = await User.findOne(
+    { email: req.body.email }
+  )
+  user.userActions.aller = req.body.aller
+  user = await user.save()
+  res.json({ result: true, user })
+})
+
+/* update venirStatus.*/
+router.post('/venir', async (req, res) => {
+
+  let user = await User.findOne(
+    { email: req.body.email }
+  )
+  user.userActions.venir = req.body.venir
+  user = await user.save()
+  res.json({ result: true, user })
+})
 
 // Routes for chat
 

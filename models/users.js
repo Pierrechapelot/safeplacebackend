@@ -8,16 +8,13 @@ const adresseSchema = mongoose.Schema({
 })
 
 const userActionsSchema = mongoose.Schema({
+    hebergement: Boolean,
     transport: Boolean,
     accompagnementDistance: Boolean,
-    hebergement: Boolean,
+    aller: Boolean,
+    venir: Boolean,
 })
 
-const settingsSchema = mongoose.Schema({
-    language: [String],
-    accueillir: Boolean,
-    seDeplacer: Boolean,
-})
 
 const userSchema = mongoose.Schema({
     email : String, 
@@ -36,7 +33,6 @@ const userSchema = mongoose.Schema({
     userActions: userActionsSchema,
     isAvailable: Boolean,
     nombreAide: Number,
-    settings: settingsSchema, 
     favouritesHelpers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'users'}]
 });
 
