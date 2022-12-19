@@ -187,6 +187,27 @@ router.post('/accompagnementdistance', async (req, res) => {
   res.json({ result: true, user })
 })
 
+/* update allerStatus.*/
+router.post('/aller', async (req, res) => {
+
+  let user = await User.findOne(
+    { email: req.body.email }
+  )
+  user.userActions.aller = req.body.aller
+  user = await user.save()
+  res.json({ result: true, user })
+})
+
+/* update venirStatus.*/
+router.post('/venir', async (req, res) => {
+
+  let user = await User.findOne(
+    { email: req.body.email }
+  )
+  user.userActions.venir = req.body.venir
+  user = await user.save()
+  res.json({ result: true, user })
+})
 
 // Routes for chat
 
