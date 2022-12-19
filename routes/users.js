@@ -5,6 +5,7 @@ const { checkBody } = require('../modules/checkBody');
 const User = require('../models/users');
 const uid2 = require('uid2');
 const bcrypt = require('bcrypt');
+
 const Pusher = require('pusher');
 const pusher = new Pusher({
   appId: process.env.PUSHER_APPID,
@@ -193,22 +194,22 @@ router.post('/accompagnementdistance', async (req, res) => {
 // Routes for chat
 
 // Join chat
-// router.put('/:username', (req, res) => {
-//   pusher.trigger('chat', 'join', {
-//     username: req.params.username,
-//   });
+router.put('/:token', (req, res) => {
+  pusher.trigger('chat', 'join', {
+    token: req.params.token,
+  });
 
-//   res.json({ result: true });
-// });
+  res.json({ result: true });
+});
 
-// // Leave chat
-// router.delete("/users/:username", (req, res) => {
-//   pusher.trigger('chat', 'leave', {
-//     username: req.params.username,
-//   });
+// Leave chat
+router.delete("/:token", (req, res) => {
+  pusher.trigger('chat', 'leave', {
+    token: req.params.token,
+  });
 
-//   res.json({ result: true });
-// });
+  res.json({ result: true });
+});
 
 // Send message
 router.post('/message', (req, res) => {
