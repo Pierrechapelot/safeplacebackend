@@ -70,17 +70,14 @@ router.post('/signup', (req, res) => {
           longitude: null,
         },
         userActions: {
+          hebergement: false,
           transport: false,
           accompagnementDistance: false,
-          hebergement: false,
+          aller: false,
+          venir: false,
         },
         isAvailable: false,
         nombreAide: null,
-        settings: {
-          language: ['français'],
-          accueillir: false,
-          seDeplacer: false
-        },
         favouritesHelpers: [null]
       });
 
@@ -96,12 +93,12 @@ router.post('/signup', (req, res) => {
 
 /* Update profile picture's URI*/
 router.post('/uri', (req, res) => {
-User.updateOne(
-  {email: req.body.email},
-  {avatarUri: req.body.avatarUri}
-).then(updatedUri => {
-  res.json({result: true, updatedUri})
-})
+  User.updateOne(
+    { email: req.body.email },
+    { avatarUri: req.body.avatarUri }
+  ).then(updatedUri => {
+    res.json({ result: true, updatedUri })
+  })
 })
 
 /* POST user/signin. */
