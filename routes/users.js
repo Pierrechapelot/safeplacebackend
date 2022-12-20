@@ -119,6 +119,8 @@ router.post("/signin", (req, res) => {
           nom: user.nom,
           token: user.token,
           avatarUri: user.avatarUri,
+          isAvailable: user.isAvailable,
+          userActions: user.userActions
         },
       });
     } else {
